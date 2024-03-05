@@ -1,4 +1,5 @@
-import React, { FC, useState } from 'react'
+import { FC } from 'react'
+import Styles from './HeaderFC.module.css'
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
@@ -18,7 +19,10 @@ const HeaderFC: FC<HeaderProps> = ({ collapsed, setCollapsed }) => {
         token: { colorBgContainer },
     } = theme.useToken();
     return (
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+        <Header 
+            className={Styles.header}
+            style={{ background: colorBgContainer }}
+        >
             <Button
                 type="text"
                 icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -28,7 +32,9 @@ const HeaderFC: FC<HeaderProps> = ({ collapsed, setCollapsed }) => {
                     width: 64,
                     height: 64,
                 }}
+                className={Styles.btn}
             />
+            <h2>Текущий турнир</h2>
         </Header>
     )
 }

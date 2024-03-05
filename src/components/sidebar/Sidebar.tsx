@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import {
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
+    HomeOutlined,
+    CalendarOutlined,
+    BuildOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -18,35 +18,40 @@ interface NavItem {
 
 interface NavProps {
     collapsed: boolean;
+    setCollapsed: (collapsed: boolean) => void;
 }
 
-const Nav: FC<NavProps> = ({ collapsed }) => {
+
+const Sidebar: FC<NavProps> = ({ collapsed, setCollapsed }) => {
     const navItems: NavItem[] = [
         {
             key: '1',
-            icon: <UserOutlined />,
-            label: 'nav 1',
+            icon: <HomeOutlined />,
+            label: 'Home',
             link: '/',
         },
         {
             key: '2',
-            icon: <VideoCameraOutlined />,
-            label: 'nav 2',
+            icon: <CalendarOutlined />,
+            label: 'Tournaments',
             link: '/tournaments',
         },
         {
             key: '3',
-            icon: <UploadOutlined />,
-            label: 'nav 3',
+            icon: <BuildOutlined />,
+            label: 'Nav',
             link: '/',
         },
     ];
+    
 
     return (
         <Sider
             trigger={null}
             collapsible
             collapsed={collapsed}
+            breakpoint='sm'
+            onBreakpoint={(broken) => setCollapsed(broken)}
         >
             <Menu
                 theme="dark"
@@ -59,9 +64,8 @@ const Nav: FC<NavProps> = ({ collapsed }) => {
                     </Menu.Item>
                 ))}
             </Menu>
-
         </Sider>
     )
 }
 
-export default Nav
+export default Sidebar

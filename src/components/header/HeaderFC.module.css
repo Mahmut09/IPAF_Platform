@@ -1,0 +1,17 @@
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1.4em;
+    padding: 0;
+}
+
+@media screen and (max-width: 576px) {
+    .header {
+        padding: 0 1em;
+        margin: 24px 16px 0px;
+        border-radius: 8px;
+    }
+    .btn {
+        display: none;
+    }
+}

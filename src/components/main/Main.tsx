@@ -1,8 +1,9 @@
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react'
 import { Layout, theme } from 'antd';
 import Sidebar from '../sidebar/Sidebar';
 import { Outlet } from 'react-router-dom';
 import HeaderFC from '../header/HeaderFC';
+import Styles from './Main.module.css'
 
 const { Content } = Layout;
 
@@ -13,9 +14,9 @@ const Main: FC = () => {
     } = theme.useToken();
 
     return (
-        <Layout>
-            <Sidebar collapsed={collapsed} />
-            <Layout>
+        <Layout className={Styles.main} id={Styles.main}>
+            <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+            <Layout id={Styles.layout}>
                 <HeaderFC setCollapsed={setCollapsed} collapsed={collapsed}/>
                 <Content
                     style={{

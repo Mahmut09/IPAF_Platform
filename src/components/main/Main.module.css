@@ -1,0 +1,14 @@
+.main {
+    min-height: 100vh;
+}
+
+@media screen and (max-width: 576px) {
+    #main {
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+
+    #layout {
+        width: 100%;
+    }
+}
