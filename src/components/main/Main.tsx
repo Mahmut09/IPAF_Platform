@@ -17,12 +17,10 @@ const Main: FC = () => {
         <Layout className={Styles.main} id={Styles.main}>
             <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
             <Layout id={Styles.layout}>
-                <HeaderFC setCollapsed={setCollapsed} collapsed={collapsed}/>
+                <HeaderFC setCollapsed={setCollapsed} collapsed={collapsed} />
                 <Content
+                    className={Styles.content}
                     style={{
-                        margin: '24px 16px',
-                        padding: 24,
-                        minHeight: 280,
                         background: colorBgContainer,
                         borderRadius: borderRadiusLG,
                     }}

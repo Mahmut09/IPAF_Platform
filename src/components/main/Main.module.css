@@ -2,13 +2,25 @@
     min-height: 100vh;
 }
 
+.content {
+    margin: 24px 16px;
+    padding: 24px;
+    min-height: 280px;
+}
+
 @media screen and (max-width: 576px) {
     #main {
-        flex-direction: column-reverse;
         width: 100%;
     }
 
     #layout {
-        width: 100%;
+        width: calc(100% - 90px);
+        margin: 0;
+        padding: 0;
+    }
+
+    .content {
+        margin: 24px 0px;
+        padding: 14px 12px;
     }
 }

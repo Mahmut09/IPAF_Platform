@@ -7,11 +7,12 @@
 
 @media screen and (max-width: 576px) {
     .header {
-        padding: 0 1em;
-        margin: 24px 16px 0px;
-        border-radius: 8px;
+        gap: .7em;
+    }
+
+    .header h2 {
+        font-size: 18px;
     }
     .btn {
-        display: none;
     }
 }

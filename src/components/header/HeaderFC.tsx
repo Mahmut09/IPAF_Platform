@@ -34,7 +34,7 @@ const HeaderFC: FC<HeaderProps> = ({ collapsed, setCollapsed }) => {
                 }}
                 className={Styles.btn}
             />
-            <h2>Текущий турнир</h2>
+            <h2>IPAF Platform</h2>
         </Header>
     )
 }

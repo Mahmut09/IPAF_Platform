@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Main from './components/main/Main'
 import Tournaments from './components/tournaments/Tournaments'
 import Home from './components/home/Home'
+import UserProfile from './components/userProfile/UserProfile'
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Main />}> 
                     <Route index path='/' element={<Home />} />
+                    <Route path='/profile' element={<UserProfile />} />
                     <Route path='/tournaments' element={<Tournaments />} />
                 </Route>
             </Routes>

@@ -4,7 +4,7 @@ import { Layout, Menu } from 'antd'
 import {
     HomeOutlined,
     CalendarOutlined,
-    BuildOutlined,
+    UserOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -25,6 +25,12 @@ interface NavProps {
 const Sidebar: FC<NavProps> = ({ collapsed, setCollapsed }) => {
     const navItems: NavItem[] = [
         {
+            key: '3',
+            icon: <UserOutlined />,
+            label: 'Profile',
+            link: '/profile',
+        },
+        {
             key: '1',
             icon: <HomeOutlined />,
             label: 'Home',
@@ -36,21 +42,15 @@ const Sidebar: FC<NavProps> = ({ collapsed, setCollapsed }) => {
             label: 'Tournaments',
             link: '/tournaments',
         },
-        {
-            key: '3',
-            icon: <BuildOutlined />,
-            label: 'Nav',
-            link: '/',
-        },
     ];
-    
+
 
     return (
         <Sider
             trigger={null}
             collapsible
             collapsed={collapsed}
-            breakpoint='sm'
+            breakpoint='md'
             onBreakpoint={(broken) => setCollapsed(broken)}
         >
             <Menu
