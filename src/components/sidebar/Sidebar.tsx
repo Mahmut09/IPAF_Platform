@@ -5,6 +5,7 @@ import {
     HomeOutlined,
     CalendarOutlined,
     UserOutlined,
+    PlusCircleOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -40,6 +41,12 @@ const Sidebar: FC<NavProps> = ({ collapsed, setCollapsed }) => {
             icon: <CalendarOutlined />,
             label: 'Tournaments',
             link: '/tournaments',
+        },
+        {
+            key: '4',
+            icon: <PlusCircleOutlined />,
+            label: 'Create Tournament',
+            link: '/createTournament',
         },
     ];
 

@@ -4,109 +4,115 @@
     border-radius: 8px;
     display: flex;
     justify-content: center;
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+}
+
+.container div {
+    flex: 1;
 }
 
 
-.content {
-    width: 50%;
-    border: 1px solid #000;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 4em;
-    padding: 2em;
-}
-
-.login {
+.info, .form form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2em;
+    justify-content: center;
+    padding: 0 4em;
+    height: 100%;
+    gap: 1.5em;
 }
 
-.face {
-    position: relative;
-    height: 140px;
-    width: 180px;
-    overflow: hidden;
-    transform-style: preserve-3d;
+.info {
+    background: rgb(92, 36, 252);
+    background: linear-gradient(135deg, rgba(92, 36, 252, 1) 0%, rgba(157, 122, 255, 1) 100%);
+    color: #fff;
+    text-align: center;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
-.face img {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    animation-duration: 0.2s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-    backface-visibility: visible;
+.info h3, .form h3 {
+    font-size: 32px;
+    text-transform: capitalize;
 }
 
-.face img.faceUp {
-    animation-name: fadeIn;
+.info p {
+    width: 70%;
 }
 
-.face img.faceDown {
-    animation-name: fadeOut;
+.info button, .form button {
+    width: 140px;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 50px;
+    padding: 14px 30px;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: transparent;
 }
 
-.face img.handsDown {
-    animation-name: hideHands;
-    animation-duration: 0.4s;
+.form {
+    padding: 20px 0;
 }
 
-.face img.handsUp {
-    top: 70px;
-    animation-duration: 0.5s;
-    animation-name: closeEyes;
+.form input {
+    font-size: 14px;
+    padding: 15px;
+    width: 260px;
+    font-weight: 300;
+    border: none;
+    background-color: #e4e4e494;
+    letter-spacing: 1.5px;
+    padding-left: 20px
 }
 
-.face img.left {
-    left: 65px;
+.form h3 {
+    color: rgb(92, 36, 252);
 }
 
-.face img.right {
-    left: 125px;
+.form span {
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
-@keyframes fadeOut {
+.form input:focus {
+    outline: none;
+}
+
+.form button {
+    background: rgb(92, 36, 252);
+    background: linear-gradient(135deg, rgba(92, 36, 252, 1) 0%, rgba(157, 122, 255, 1) 100%);
+}
+
+.slideIn {
+    animation: slideIn 0.5s forwards cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slideOut {
+    animation: slideOut 0.5s forwards cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideOut {
     from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
         opacity: 1;
     }
-
-    to {
-        opacity: 0;
-    }
 }
 
-@keyframes fadeIn {
+@keyframes slideIn {
     from {
+        transform: translateX(-100%);
         opacity: 0;
     }
-
     to {
+        transform: translateX(0);
         opacity: 1;
-    }
-}
-
-@keyframes closeEyes {
-    0% {
-        top: 130px;
-    }
-
-    100% {
-        top: 30px;
-    }
-}
-
-@keyframes hideHands {
-    0% {
-        top: 30px;
-    }
-
-    100% {
-        top: 130px;
-        opacity: 0;
     }
 }

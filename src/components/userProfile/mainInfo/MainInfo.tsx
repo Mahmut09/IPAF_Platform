@@ -14,7 +14,7 @@ const MainInfo: FC = () => {
             <h2>Marat Altay</h2>
             <img src={UserIcon} alt="user-icon" />
             <p>
-                “I am a UX designer for over 5 years by profession and an entrepreneur by heart. I see myself as an eager learner, with an urge to explore and try out new experiences”
+                I am a UX designer for over 5 years by profession and an entrepreneur by heart.
             </p>
             <ul className={Styles.avatarList}>
                 <li>
