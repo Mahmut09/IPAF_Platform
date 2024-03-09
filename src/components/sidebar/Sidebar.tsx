@@ -21,7 +21,6 @@ interface NavProps {
     setCollapsed: (collapsed: boolean) => void;
 }
 
-
 const Sidebar: FC<NavProps> = ({ collapsed, setCollapsed }) => {
     const navItems: NavItem[] = [
         {
@@ -44,6 +43,11 @@ const Sidebar: FC<NavProps> = ({ collapsed, setCollapsed }) => {
         },
     ];
 
+    const menuItems = navItems.map(item => ({
+        key: item.key,
+        icon: item.icon,
+        label: <Link to={item.link}>{item.label}</Link>,
+    }));
 
     return (
         <Sider
@@ -57,13 +61,8 @@ const Sidebar: FC<NavProps> = ({ collapsed, setCollapsed }) => {
                 theme="dark"
                 mode="inline"
                 defaultSelectedKeys={['1']}
-            >
-                {navItems.map(item => (
-                    <Menu.Item key={item.key} icon={item.icon}>
-                        <Link to={item.link}>{item.label}</Link>
-                    </Menu.Item>
-                ))}
-            </Menu>
+                items={menuItems}
+            />
         </Sider>
     )
 }
