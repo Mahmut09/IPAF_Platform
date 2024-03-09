@@ -1,0 +1,18 @@
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1.4em;
+    padding: 0;
+}
+
+@media screen and (max-width: 576px) {
+    .header {
+        gap: .7em;
+    }
+
+    .header h2 {
+        font-size: 18px;
+    }
+    .btn {
+    }
+}

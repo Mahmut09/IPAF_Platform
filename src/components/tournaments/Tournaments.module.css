@@ -1,0 +1,18 @@
+.cards {
+    display: flex;
+    gap: 1.4em;
+    flex-wrap: wrap;
+    margin-top: 2.4em;
+}
+
+.cards>div {
+    width: max(220px, 24%);
+    max-width: 350px;
+    flex: 1;
+}
+
+@media screen and (max-width: 756px) {
+    .segment div {
+        flex-direction: column;
+    }
+}
