@@ -3,6 +3,9 @@ import Styles from './UserProfile.module.css'
 import MainInfo from './mainInfo/MainInfo'
 import ProfileAchievement from './profileAchievement/ProfileAchievement'
 import ProfileInfo from './profileInfo/ProfileInfo'
+import Authorization from '../authorization/Authorization'
+import { useSelector } from 'react-redux'
+import { MyRootState } from '../../store/store'
 
 const infoData = [
     {
@@ -26,21 +29,27 @@ const infoData = [
 ];
 
 const UserProfile: FC = () => {
-    return (
-        <div className={Styles.container}>
-            <MainInfo />
-            <ProfileAchievement />
-            <div className={`${Styles.block} ${Styles.stats}`}></div>
+    const isAuth = useSelector((state: MyRootState) => state.isAuth.value);
+    console.log(isAuth);
 
-            {infoData.map(item => (
-                <ProfileInfo
-                    key={item.id}
-                    title={item.title}
-                    value={item.value}
-                    type={item.type}
-                />
-            ))}
-        </div>
+    return (
+        isAuth ?
+            <div className={Styles.container}>
+                <MainInfo />
+                <ProfileAchievement />
+                <div className={`${Styles.block} ${Styles.stats}`}></div>
+
+                {infoData.map(item => (
+                    <ProfileInfo
+                        key={item.id}
+                        title={item.title}
+                        value={item.value}
+                        type={item.type}
+                    />
+                ))}
+            </div>
+            :
+            <Authorization />
     )
 }
 

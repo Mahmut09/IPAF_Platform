@@ -7,7 +7,7 @@
         "avatar stats stats"
         "info1 info2 info3";
     gap: 2em;
-    grid-template-rows: minmax(170px, 35%) minmax(170px, 35%) minmax(125px, a);
+    /* grid-template-rows: minmax(170px, 35%) minmax(170px, 35%) minmax(125px, 10%); */
     grid-template-columns: repeat(3, 1fr);
 }
 

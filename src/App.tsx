@@ -6,18 +6,22 @@ import Main from './components/main/Main'
 import Tournaments from './components/tournaments/Tournaments'
 import Home from './components/home/Home'
 import UserProfile from './components/userProfile/UserProfile'
+import store from './store/store'
+import { Provider } from 'react-redux'
 
 function App() {
     return (
-        <Router>
-            <Routes>
-                <Route path='/' element={<Main />}> 
-                    <Route index path='/' element={<Home />} />
-                    <Route path='/profile' element={<UserProfile />} />
-                    <Route path='/tournaments' element={<Tournaments />} />
-                </Route>
-            </Routes>
-        </Router>
+        <Provider store={store}>
+            <Router>
+                <Routes>
+                    <Route path='/' element={<Main />}>
+                        <Route index path='/' element={<Home />} />
+                        <Route path='/profile' element={<UserProfile />} />
+                        <Route path='/tournaments' element={<Tournaments />} />
+                    </Route>
+                </Routes>
+            </Router>
+        </Provider>
     )
 }
 

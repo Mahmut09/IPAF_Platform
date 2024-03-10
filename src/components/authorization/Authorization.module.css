@@ -1,0 +1,112 @@
+.container {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.content {
+    width: 50%;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 4em;
+    padding: 2em;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+}
+
+.face {
+    position: relative;
+    height: 140px;
+    width: 180px;
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+.face img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-duration: 0.2s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    backface-visibility: visible;
+}
+
+.face img.faceUp {
+    animation-name: fadeIn;
+}
+
+.face img.faceDown {
+    animation-name: fadeOut;
+}
+
+.face img.handsDown {
+    animation-name: hideHands;
+    animation-duration: 0.4s;
+}
+
+.face img.handsUp {
+    top: 70px;
+    animation-duration: 0.5s;
+    animation-name: closeEyes;
+}
+
+.face img.left {
+    left: 65px;
+}
+
+.face img.right {
+    left: 125px;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes closeEyes {
+    0% {
+        top: 130px;
+    }
+
+    100% {
+        top: 30px;
+    }
+}
+
+@keyframes hideHands {
+    0% {
+        top: 30px;
+    }
+
+    100% {
+        top: 130px;
+        opacity: 0;
+    }
+}
