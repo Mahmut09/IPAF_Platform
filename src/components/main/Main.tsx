@@ -15,7 +15,10 @@ const Main: FC = () => {
 
     return (
         <Layout className={Styles.main} id={Styles.main}>
-            <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+            <Sidebar
+                collapsed={collapsed}
+                setCollapsed={setCollapsed}
+            />
             <Layout id={Styles.layout}>
                 <HeaderFC setCollapsed={setCollapsed} collapsed={collapsed} />
                 <Content

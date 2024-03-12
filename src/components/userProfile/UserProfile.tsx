@@ -30,7 +30,6 @@ const infoData = [
 
 const UserProfile: FC = () => {
     const isAuth = useSelector((state: MyRootState) => state.isAuth.value);
-    console.log(isAuth);
 
     return (
         isAuth ?

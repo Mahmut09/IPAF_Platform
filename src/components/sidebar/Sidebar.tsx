@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import {
@@ -7,6 +7,10 @@ import {
     UserOutlined,
     PlusCircleOutlined,
 } from '@ant-design/icons';
+import { MyRootState } from '../../store/store'
+import { useDispatch, useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
+import { setSidebarIsActive } from '../../slices/sideSlice'
 
 const { Sider } = Layout;
 
@@ -56,6 +60,17 @@ const Sidebar: FC<NavProps> = ({ collapsed, setCollapsed }) => {
         label: <Link to={item.link}>{item.label}</Link>,
     }));
 
+    const sidebarIsActive = useSelector((state: MyRootState) => state.sidebarIsActive.value);
+    const dispatch = useDispatch();
+
+    const isMobileScreen = useMediaQuery({ maxWidth: 425 });
+    
+    useEffect(() => {
+        if (isMobileScreen) {
+            dispatch(setSidebarIsActive(false));
+        }
+    }, [dispatch, isMobileScreen]);
+
     return (
         <Sider
             trigger={null}
@@ -63,6 +78,7 @@ const Sidebar: FC<NavProps> = ({ collapsed, setCollapsed }) => {
             collapsed={collapsed}
             breakpoint='md'
             onBreakpoint={(broken) => setCollapsed(broken)}
+            style={sidebarIsActive ? {} : {display: 'none'}}
         >
             <Menu
                 theme="dark"

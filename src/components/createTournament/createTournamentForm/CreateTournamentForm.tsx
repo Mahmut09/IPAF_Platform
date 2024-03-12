@@ -1,16 +1,13 @@
 import { FC } from 'react';
 import {
     Button,
-    Cascader,
     DatePicker,
     Form,
     Input,
-    InputNumber,
     Select,
-    Switch,
-    TreeSelect,
+    TimePicker,
 } from 'antd';
-
+import Styles from '../CreateTournament.module.css'
 
 const CreateTournamentForm: FC = () => {
     return (
@@ -18,46 +15,51 @@ const CreateTournamentForm: FC = () => {
             labelCol={{ span: 4 }}
             wrapperCol={{ span: 14 }}
             layout="horizontal"
-            style={{ maxWidth: 600 }}
+            // style={{ maxWidth: 600 }}
+            className={Styles.form}
         >
-            <Form.Item label="Input">
-                <Input />
-            </Form.Item>
-            <Form.Item label="Select">
-                <Select>
-                    <Select.Option value="demo">Demo</Select.Option>
-                </Select>
-            </Form.Item>
-            <Form.Item label="TreeSelect">
-                <TreeSelect
-                    treeData={[
-                        { title: 'Light', value: 'light', children: [{ title: 'Bamboo', value: 'bamboo' }] },
-                    ]}
-                />
-            </Form.Item>
-            <Form.Item label="Cascader">
-                <Cascader
-                    options={[
-                        {
-                            value: 'zhejiang',
-                            label: 'Zhejiang',
-                            children: [{ value: 'hangzhou', label: 'Hangzhou' }],
-                        },
-                    ]}
-                />
-            </Form.Item>
-            <Form.Item label="DatePicker">
-                <DatePicker />
-            </Form.Item>
-            <Form.Item label="InputNumber">
-                <InputNumber />
-            </Form.Item>
-            <Form.Item label="Switch" valuePropName="checked">
-                <Switch />
-            </Form.Item>
-            <Form.Item label="Button">
-                <Button>Button</Button>
-            </Form.Item>
+            <div className={Styles.column}>
+                <Form.Item>
+                    <Input placeholder='Название турнира' required />
+                </Form.Item>
+                <Form.Item>
+                    <Select placeholder='Дисциплина'>
+                        <Select.Option value="powerlifting">Пауэрлифтинг</Select.Option>
+                        <Select.Option value="demo">Тяжелая атлетика</Select.Option>
+                        <Select.Option value="demo1">Легкая атлетика</Select.Option>
+                        <Select.Option value="demo2">Бокс</Select.Option>
+                    </Select>
+                </Form.Item>
+                <Form.Item>
+                    <Input placeholder='Адрес взешивания' required />
+                </Form.Item>
+                <Form.Item>
+                    <DatePicker placeholder='Дата взвешивания' style={{ width: "100%" }} />
+                </Form.Item>
+                <Form.Item>
+                    <TimePicker placeholder='Время начала взвешивания' style={{ width: "100%" }} />
+                </Form.Item>
+                <Form.Item>
+                    <Input.TextArea rows={3} placeholder='Описание турнира'/>
+                </Form.Item>
+            </div>
+            <div className={Styles.column}>
+                <Form.Item>
+                    <Input placeholder='Место проведения турнира' />
+                </Form.Item>
+                <Form.Item>
+                    <Input placeholder='Адрес проведения турнира' />
+                </Form.Item>
+                <Form.Item>
+                    <DatePicker placeholder='Дата проведения' style={{ width: "100%" }} />
+                </Form.Item>
+                <Form.Item>
+                    <TimePicker placeholder='Время начала турнира' style={{ width: "100%" }} />
+                </Form.Item>
+                <Form.Item>
+                    <Button>Создать турнир</Button>
+                </Form.Item>
+            </div>
         </Form>
     )
 }

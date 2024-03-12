@@ -29,8 +29,7 @@
     background: linear-gradient(135deg, rgba(92, 36, 252, 1) 0%, rgba(157, 122, 255, 1) 100%);
     color: #fff;
     text-align: center;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-radius: 8px;
 }
 
 .info h3, .form h3 {
@@ -115,4 +114,20 @@
         transform: translateX(0);
         opacity: 1;
     }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 2em 1.4em;
+    }
+
+    .info {
+        padding: 2em 1.4em;
+        border-radius: 8px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    
 }

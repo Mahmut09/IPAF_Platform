@@ -17,8 +17,26 @@
     margin-bottom: .7em;
 }
 
+.form {
+    display: flex;
+    width: 100%;
+}
+
+.column {
+    width: 50%;
+}
+
 @media screen and (max-width: 768px) {
     .info {
         padding: .8em;
+    }
+
+    .form {
+        flex-direction: column;
+        padding: .8em;
+    }
+
+    .column {
+        width: 100%;
     }
 }
