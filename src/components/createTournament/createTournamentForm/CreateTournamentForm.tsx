@@ -40,7 +40,7 @@ const CreateTournamentForm: FC = () => {
                     <TimePicker placeholder='Время начала взвешивания' style={{ width: "100%" }} />
                 </Form.Item>
                 <Form.Item>
-                    <Input.TextArea rows={3} placeholder='Описание турнира'/>
+                    <Input.TextArea rows={3} placeholder='Описание турнира' />
                 </Form.Item>
             </div>
             <div className={Styles.column}>
