@@ -1,11 +1,13 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import Styles from './UserProfile.module.css'
 import MainInfo from './mainInfo/MainInfo'
 import ProfileAchievement from './profileAchievement/ProfileAchievement'
 import ProfileInfo from './profileInfo/ProfileInfo'
 import Authorization from '../authorization/Authorization'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { MyRootState } from '../../store/store'
+import axios from 'axios'
+import { setIsAuthenticated } from '../../slices/authSlice'
 
 const infoData = [
     {
@@ -29,7 +31,26 @@ const infoData = [
 ];
 
 const UserProfile: FC = () => {
+    const serverURL = useSelector((state: MyRootState) => state.serverURL.value);
     const isAuth = useSelector((state: MyRootState) => state.isAuth.value);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        axios.get(`${serverURL}/auth/me`, {
+            withCredentials: true,
+        })
+            .then(() => {
+                dispatch(setIsAuthenticated(true));
+            })
+            .catch((e) => {
+                const errorCode = e.response ? e.response.status : 500;
+                if (errorCode === 401) {
+                    dispatch(setIsAuthenticated(false));
+                }
+            });
+    }, [serverURL, dispatch]);
+
 
     return (
         isAuth ?

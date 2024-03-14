@@ -10,9 +10,9 @@ const Authorization: FC = () => {
     return (
         <div className={Styles.container}>
             {isSigningUp ?
-                <SignIn toggleForm={toggleView} />
-                :
                 <SignUp toggleForm={toggleView} />
+                :
+                <SignIn toggleForm={toggleView} />
             }
         </div>
     );

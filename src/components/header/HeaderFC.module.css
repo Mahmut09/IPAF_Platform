@@ -5,6 +5,18 @@
     padding: 0;
 }
 
+.headerRow {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 2em;
+}
+
+.headerRow button {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 576px) {
     .header {
         gap: .7em;
@@ -12,7 +24,5 @@
 
     .header h2 {
         font-size: 18px;
-    }
-    .btn {
     }
 }

@@ -2,15 +2,24 @@ import { FC, useState } from 'react'
 import axios from 'axios';
 import SignInForm from './signInForm/SignInForm';
 import { MyRootState } from '../../../store/store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { message } from 'antd';
+import { setIsAuthenticated } from '../../../slices/authSlice';
 
 interface SignInProps {
     toggleForm: () => void;
 }
 
+interface ISignInResponse {
+    "access_token": string;
+    "token_type": string;
+}
+
 const SignIn: FC<SignInProps> = ({ toggleForm }) => {
     const serverURL = useSelector((state: MyRootState) => state.serverURL.value);
+
+    const dispatch = useDispatch();
+
     const [messageApi, contextHolder] = message.useMessage();
 
     const [emailError, setEmailError] = useState<string>('');
@@ -28,20 +37,23 @@ const SignIn: FC<SignInProps> = ({ toggleForm }) => {
 
     const handleUserLogin = (e: React.FormEvent) => {
         e.preventDefault();
-        axios.post(
-            `${serverURL} /auth/login`,
+        axios.post<ISignInResponse>(
+            `${serverURL}/auth/login`,
             loginData,
             {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
+                withCredentials: true,
             }
         )
-            .then(res => {
-                console.log(res);
+            .then(() => {
+                dispatch((setIsAuthenticated(true)));
             })
-            .catch(() => {
+            .catch((e) => {
+                console.error(e);
                 errorMessage();
+                dispatch((setIsAuthenticated(false)));
             });
     }
 
