@@ -94,6 +94,25 @@
     animation: slideOut 0.5s forwards cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+#emailBlock {
+    position: relative;
+    flex: 0;
+    padding-top: 20px;
+}
+
+#error {
+    text-decoration: none;
+    user-select: none;
+    color: tomato;
+    width: 300px;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    font-size: 12px;
+}
+
 @keyframes slideOut {
     from {
         transform: translateX(100%);

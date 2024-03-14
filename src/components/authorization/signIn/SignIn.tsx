@@ -1,24 +1,35 @@
 import { FC, useState } from 'react'
-import Styles from '../Authorization.module.css'
 import axios from 'axios';
+import SignInForm from './signInForm/SignInForm';
 import { MyRootState } from '../../../store/store';
 import { useSelector } from 'react-redux';
+import { message } from 'antd';
 
 interface SignInProps {
     toggleForm: () => void;
 }
 
 const SignIn: FC<SignInProps> = ({ toggleForm }) => {
-    const serverURL = useSelector((state: MyRootState) => state.serverURL.value)
+    const serverURL = useSelector((state: MyRootState) => state.serverURL.value);
+    const [messageApi, contextHolder] = message.useMessage();
+
+    const [emailError, setEmailError] = useState<string>('');
     const [loginData, setLoginData] = useState({
         username: '',
         password: '',
     });
 
+    const errorMessage = () => {
+        messageApi.open({
+            type: 'error',
+            content: 'Логин или пароль введены не верно!',
+        });
+    };
+
     const handleUserLogin = (e: React.FormEvent) => {
         e.preventDefault();
         axios.post(
-            `${serverURL}/auth/login`,
+            `${serverURL} /auth/login`,
             loginData,
             {
                 headers: {
@@ -29,43 +40,35 @@ const SignIn: FC<SignInProps> = ({ toggleForm }) => {
             .then(res => {
                 console.log(res);
             })
-            .catch(error => {
-                console.error('Error:', error);
+            .catch(() => {
+                errorMessage();
             });
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setLoginData({ ...loginData, [e.target.name]: e.target.value });
-    }
+        const { name, value } = e.target;
+        setLoginData({ ...loginData, [name]: value });
+
+        if (name === 'username') {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(value)) {
+                setEmailError('Введите корректный адрес электронной почты');
+            } else {
+                setEmailError('');
+            }
+        }
+    };
+
 
     return (
         <>
-            <div className={`${Styles.form} ${Styles.slideOut}`}>
-                <form onSubmit={handleUserLogin}>
-                    <h3>Sign In</h3>
-                    <input
-                        type="email"
-                        placeholder='Email'
-                        name='username'
-                        onChange={handleChange}
-                    />
-                    <input
-                        type="password"
-                        placeholder='Password'
-                        name='password'
-                        onChange={handleChange}
-                    />
-                    <span>Forgot your password ?</span>
-                    <button>Sign in</button>
-                </form>
-            </div>
-            <div className={`${Styles.info} ${Styles.slideOut}`}>
-                <h3>Hello, friend!</h3>
-                <p>
-                    Enter your personal details and start a journey with us
-                </p>
-                <button onClick={toggleForm}>Sign Up</button>
-            </div>
+            {contextHolder}
+            <SignInForm
+                handleUserLogin={handleUserLogin}
+                handleChange={handleChange}
+                toggleForm={toggleForm}
+                emailError={emailError}
+            />
         </>
     )
 }
