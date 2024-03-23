@@ -5,7 +5,7 @@
     margin-top: 2.4em;
 }
 
-.cards>div {
+.cards > a {
     width: max(220px, 24%);
     max-width: 350px;
     flex: 1;

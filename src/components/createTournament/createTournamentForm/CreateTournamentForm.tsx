@@ -5,18 +5,16 @@ import {
     Form,
     Input,
     Select,
-    TimePicker,
 } from 'antd';
-import dayjs, { Dayjs } from 'dayjs';
 import Styles from '../CreateTournament.module.css'
 import { useSelector } from 'react-redux';
 import { MyRootState } from '../../../store/store';
+import { ICompetition } from '../../../types/types';
+import { Dayjs } from 'dayjs';
 import axios from 'axios';
-import { ICompetition } from '../../../types/types';`
-`
 
 const CreateTournamentForm: FC = () => {
-    const hostURL = useSelector((state: MyRootState) => state.serverURL);
+    const hostURL = useSelector((state: MyRootState) => state.serverURL.value);
 
     const [tournamentData, setTournamentData] = useState<ICompetition>({
         name: "",
@@ -39,16 +37,15 @@ const CreateTournamentForm: FC = () => {
     const handleCreateTournament = () => {
         console.log(tournamentData);
 
-        // axios.post(`${hostURL}/competitions`, JSON.stringify(tournamentData))
-        //     .then(res => {
-        //         console.log(res);
-        //     })
+        axios.post(`${hostURL}/competitions`, JSON.stringify(tournamentData))
+            .then(res => {
+                console.log(res);
+            })
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         if (name.includes('.')) {
-            // Если name содержит точку, это указывает на путь вложенности объекта
             const keys = name.split('.');
             setTournamentData(prevState => ({
                 ...prevState,
@@ -67,30 +64,16 @@ const CreateTournamentForm: FC = () => {
         setTournamentData({ ...tournamentData, "description": e.target.value })
     }
 
-    // const handleSelectChange = (value: string, option: number) => {
-    //     console.log(value);
-    //     console.log(tournamentData);
+    const handleSelectChange = (value: string) => {
+        setTournamentData({ ...tournamentData, category_id: +value });
+    };
 
-    //     setTournamentData({ ...tournamentData, category_id: +option });
-    // };
-
-    // const handleDateTimeChange = (value: Dayjs | null, dateString: string, fieldName: string) => {
-    //     if (!value) return;
-
-    //     const [field, type] = fieldName.split('_');
-    //     const currentData = tournamentData[field];
-
-    //     let newDateTime;
-    //     if (type === 'date') {
-    //         const time = currentData.split(' ')[1] || '00:00';
-    //         newDateTime = `${dateString} ${time}`;
-    //     } else {
-    //         const date = currentData.split(' ')[0] || dayjs().format('YYYY-MM-DD');
-    //         newDateTime = `${date} ${dateString}`;
-    //     }
-
-    //     setTournamentData({ ...tournamentData, [field]: newDateTime });
-    // }
+    const handleDateChange = (_: Dayjs, dateString: string | string[], name: string | string[]) => {
+        setTournamentData(prevState => ({
+            ...prevState,
+            [name]: dateString,
+        }));
+    };
 
     return (
         <Form
@@ -111,7 +94,7 @@ const CreateTournamentForm: FC = () => {
                 </Form.Item>
                 <Form.Item>
                     <Select placeholder='Дисциплина'
-                    // onChange={(value, option) => handleSelectChange(value, option)}
+                        onChange={(value) => handleSelectChange(value)}
                     >
                         <Select.Option value="1">Пауэрлифтинг</Select.Option>
                         <Select.Option value="2">Тяжелая атлетика</Select.Option>
@@ -123,7 +106,7 @@ const CreateTournamentForm: FC = () => {
                     <Input
                         placeholder='Адрес взешивания'
                         required
-                        name='event_location.street'
+                        name='weighing_location.street'
                         onChange={handleChange}
                     />
                 </Form.Item>
@@ -132,17 +115,8 @@ const CreateTournamentForm: FC = () => {
                         placeholder='Дата взвешивания'
                         style={{ width: "100%" }}
                         name='date_weight'
-                    // onChange={(value, dateString) => handleDateTimeChange(value, dateString, 'date_weight')}
-                    />
-                </Form.Item>
-                <Form.Item>
-                    <TimePicker
-                        placeholder='Время начала взвешивания'
-                        showHour
-                        showMinute
-                        style={{ width: "100%" }}
-                        name='date_weight_time'
-                    // onChange={(value, timeString) => handleDateTimeChange(value, timeString, 'date_weight_time')}
+                        showTime={{ format: 'HH:mm' }}
+                        onChange={(value, dateString) => handleDateChange(value, dateString, 'date_weight')}
                     />
                 </Form.Item>
                 <Form.Item>
@@ -158,7 +132,7 @@ const CreateTournamentForm: FC = () => {
                 <Form.Item>
                     <Input
                         placeholder='Адрес проведения турнира'
-                        name='event_location'
+                        name='event_location.street'
                         onChange={handleChange}
                     />
                 </Form.Item>
@@ -167,21 +141,18 @@ const CreateTournamentForm: FC = () => {
                         placeholder='Дата проведения'
                         style={{ width: "100%" }}
                         name='event_date'
-                    // onChange={(value, dateString) => handleDateTimeChange(value, dateString, 'event_date')}
+                        showTime={{ format: "HH:mm" }}
+                        onChange={(value, dateString) => handleDateChange(value, dateString, 'event_date')}
                     />
                 </Form.Item>
                 <Form.Item>
-                    <TimePicker
-                        placeholder='Время начала турнира'
-                        showHour
-                        showMinute
-                        style={{ width: "100%" }}
-                        name='event_date_time'
-                    // onChange={(value, timeString) => handleDateTimeChange(value, timeString, 'event_date_time')}
-                    />
-                </Form.Item>
-                <Form.Item>
-                    <Button className={Styles.btn} type='primary'>Создать турнир</Button>
+                    <Button
+                        className={Styles.btn}
+                        type='primary'
+                        htmlType='submit'
+                    >
+                        Создать турнир
+                    </Button>
                 </Form.Item>
             </div>
         </Form>

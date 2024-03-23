@@ -10,6 +10,7 @@ import Tournaments from './components/tournaments/Tournaments'
 import Home from './components/home/Home'
 import UserProfile from './components/userProfile/UserProfile'
 import CreateTournament from './components/createTournament/CreateTournament'
+import Tournament from './components/tournament/Tournament'
 
 
 function App() {
@@ -21,7 +22,9 @@ function App() {
                         <Route index path='/' element={<Home />} />
                         <Route path='/profile' element={<UserProfile />} />
                         <Route path='/tournaments' element={<Tournaments />} />
+                        <Route path="/tournaments/:tournamentName" element={<Tournament />} />
                         <Route path='/createTournament' element={<CreateTournament />} />
+                        
                     </Route>
                 </Routes>
             </Router>
